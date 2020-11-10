@@ -28,7 +28,7 @@ library
   exposed-modules:
 
   other-modules:
-
+      Lang
   hs-source-dirs:
       src
   build-depends:
