@@ -1,0 +1,47 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 0ceaa5844610de5f18427728d37aff33199693eae4a8f3df45763c79879ec91b
+
+name:           whileplus
+version:        1.0.0
+description:    Please see the README on GitHub at <https://github.com/jkomyno/whileplus#readme>
+homepage:       https://github.com/jkomyno/whileplus#readme
+bug-reports:    https://github.com/jkomyno/whileplus/issues
+author:         Alberto Schiabel
+maintainer:     alberto.schiabel@gmail.com
+copyright:      Copyright Alberto Schiabel 2020
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/jkomyno/whileplus
+
+library
+  exposed-modules:
+
+  other-modules:
+
+  hs-source-dirs:
+      src
+  build-depends:
+      base >= 4.12 && < 5
+    , containers >= 0.6 && < 1
+  default-language: Haskell2010
+
+executable whileplus
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >= 4.12 && < 5
+    , whileplus
+  default-language: Haskell2010
