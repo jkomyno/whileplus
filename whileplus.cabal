@@ -30,6 +30,7 @@ library
   other-modules:
       Lang
     , LangException
+    , Parser
     , State
     , State.Stateable
   hs-source-dirs:
@@ -39,6 +40,8 @@ library
       base >= 4.12 && < 5
     , containers >= 0.6 && < 1
     , exceptions >= 0.10 && < 0.11
+    , parsec >= 3.1 && < 4
+    , text >= 1.2 && < 1.3
   default-language: Haskell2010
 
 executable whileplus
