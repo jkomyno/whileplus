@@ -28,13 +28,15 @@ library
   exposed-modules:
 
   other-modules:
-      Lang
+      Desugar.DesugaredLang
+    , Lang
     , LangException
     , Parser
     , State
     , State.Stateable
   hs-source-dirs:
       src
+    , src/Desugar
     , src/State
   build-depends:
       base >= 4.12 && < 5
