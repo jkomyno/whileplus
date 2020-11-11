@@ -30,8 +30,11 @@ library
   other-modules:
       Lang
     , LangException
+    , State
+    , State.Stateable
   hs-source-dirs:
       src
+    , src/State
   build-depends:
       base >= 4.12 && < 5
     , containers >= 0.6 && < 1
