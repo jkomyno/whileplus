@@ -28,7 +28,12 @@ library
   exposed-modules:
 
   other-modules:
-      Desugar.DesugaredLang
+      Desugar
+    , Desugar.AExpr
+    , Desugar.BExpr
+    , Desugar.DesugaredLang
+    , Desugar.Statement
+    , Desugar.Utils
     , Lang
     , LangException
     , Parser
