@@ -28,7 +28,9 @@ library
   exposed-modules:
 
   other-modules:
-      Desugar
+      Check.CheckVariables
+    , Check.CheckVariablesWithState
+    , Desugar
     , Desugar.AExpr
     , Desugar.BExpr
     , Desugar.DesugaredLang
@@ -41,6 +43,7 @@ library
     , State.Stateable
   hs-source-dirs:
       src
+    , src/Check
     , src/Desugar
     , src/State
   build-depends:
