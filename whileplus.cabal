@@ -36,6 +36,9 @@ library
     , Desugar.DesugaredLang
     , Desugar.Statement
     , Desugar.Utils
+    , Eval.AExpr
+    , Eval.BExpr
+    , Eval.Evaluator
     , Lang
     , LangException
     , Parser
@@ -45,6 +48,7 @@ library
       src
     , src/Check
     , src/Desugar
+    , src/Eval
     , src/State
   build-depends:
       base >= 4.12 && < 5
