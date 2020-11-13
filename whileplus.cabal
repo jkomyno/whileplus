@@ -43,6 +43,7 @@ library
     , Lang
     , LangException
     , Parser
+    , Preprocess
     , State
     , State.Stateable
   hs-source-dirs:
