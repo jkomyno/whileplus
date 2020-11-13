@@ -18,7 +18,10 @@ import State (
   , insertVar)
 import Eval.AExpr (evalAExpr)
 import Eval.BExpr (evalBExpr)
-
+import FixPoint (
+    cond
+  , id'
+  , fix)
 
 -- | Evaluate the entire desugared program and return the final state
 eval :: DesugaredProgram -> State -> State
@@ -55,12 +58,16 @@ evalConditional b t f state =
 
 evalWhile :: BExpr -> Statement ->
              State -> State
-evalWhile b stmt = undefined
+evalWhile b stmt = let
+  f g = cond (evalBExpr b, g . evalStmt stmt, id')
+  in fix f
 
 
 evalRepeat' :: Statement -> BExpr ->
                State -> State
-evalRepeat' stmt b = undefined
+evalRepeat' stmt b = let
+  f' g = cond (evalBExpr b, id', g) . evalStmt stmt
+  in fix f'
 
 
 evalComposition :: [Statement] ->
