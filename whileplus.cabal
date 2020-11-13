@@ -39,6 +39,7 @@ library
     , Eval.AExpr
     , Eval.BExpr
     , Eval.Evaluator
+    , FixPoint
     , Lang
     , LangException
     , Parser
