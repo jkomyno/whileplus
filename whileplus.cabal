@@ -46,6 +46,7 @@ library
     , Preprocess
     , Pretty
     , Repl.Commands.AstCmd
+    , Repl.Commands.DesugarCmd
     , Repl.Commands.HelpCmd
     , Repl.Commands.MemoryCmd
     , Repl.Commands.QuitCmd
