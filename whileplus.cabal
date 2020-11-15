@@ -48,6 +48,7 @@ library
     , Repl.Commands.HelpCmd
     , Repl.Commands.QuitCmd
     , Repl.Commands.Utils
+    , Repl.Commands.VerboseCmd
     , Repl.Messages
     , Repl.Types
     , State
