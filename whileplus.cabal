@@ -46,6 +46,7 @@ library
     , Preprocess
     , Pretty
     , Repl.Commands.HelpCmd
+    , Repl.Commands.MemoryCmd
     , Repl.Commands.QuitCmd
     , Repl.Commands.Utils
     , Repl.Commands.VerboseCmd
