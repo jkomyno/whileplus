@@ -49,6 +49,7 @@ library
     , Repl.Commands.MemoryCmd
     , Repl.Commands.QuitCmd
     , Repl.Commands.ResetCmd
+    , Repl.Commands.StateCmd
     , Repl.Commands.Utils
     , Repl.Commands.VerboseCmd
     , Repl.Messages
