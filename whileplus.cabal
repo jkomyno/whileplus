@@ -45,6 +45,7 @@ library
     , Parser
     , Preprocess
     , Pretty
+    , Repl.Commands.AstCmd
     , Repl.Commands.HelpCmd
     , Repl.Commands.MemoryCmd
     , Repl.Commands.QuitCmd
