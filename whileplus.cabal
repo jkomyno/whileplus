@@ -45,6 +45,7 @@ library
     , Parser
     , Preprocess
     , Pretty
+    , Repl.Commands
     , Repl.Commands.AstCmd
     , Repl.Commands.CheckCmd
     , Repl.Commands.DesugarCmd
