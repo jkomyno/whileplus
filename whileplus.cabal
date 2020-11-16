@@ -49,6 +49,7 @@ library
     , Repl.Commands.CheckCmd
     , Repl.Commands.DesugarCmd
     , Repl.Commands.HelpCmd
+    , Repl.Commands.InterpretCmd
     , Repl.Commands.LoadCmd
     , Repl.Commands.MemoryCmd
     , Repl.Commands.QuitCmd
