@@ -26,7 +26,7 @@ source-repository head
 
 library
   exposed-modules:
-
+      Repl
   other-modules:
       Check.CheckVariables
     , Check.CheckVariablesWithState
