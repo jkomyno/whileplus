@@ -1,0 +1,11 @@
+/** 
+ * if the second arithmetic clause is negative,
+ * the loop is immediately broken
+ */
+for x := 0 to -10 do skip;
+
+// x is 0
+
+for y := 0 to 5 do skip;
+
+// y is 5

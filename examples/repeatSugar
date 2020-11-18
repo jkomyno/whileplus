@@ -1,0 +1,6 @@
+x := 0;
+repeat (
+  x := x + 1
+) until (x >= 10);
+
+// x is 10

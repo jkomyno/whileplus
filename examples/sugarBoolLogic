@@ -1,0 +1,15 @@
+// OpAnd
+if (true && true)   then a := 1 else a := 0;
+if (true && false)  then b := 0 else b := 1;
+if (false && true)  then c := 0 else c := 1;
+if (false && false) then d := 0 else d := 1;
+
+// OpOr
+if (true || true)   then e := 1 else e := 0;
+if (true || false)  then f := 1 else f := 0;
+if (false || true)  then g := 1 else g := 0;
+if (false || false) then h := 0 else h := 1;
+
+// OpNeq
+if (!true)  then i := 0 else i := 1;
+if (!false) then j := 1 else j := 0;

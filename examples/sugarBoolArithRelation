@@ -1,0 +1,28 @@
+// OpEq
+if (0 = 0) then a := 1 else a := 0;
+
+// OpNeq
+// Desugar: (a != a') => !(a = a')
+//
+if (0 != 1) then b := 1 else b := 0;
+
+// OpLte
+if (0 <= 1) then c := 1 else c := 0;
+if (1 <= 1) then d := 1 else d := 0;
+
+// OpLt
+// Desugar: (a < a') => (a <= a') && !(a = a')
+//
+if (0 < 1) then e := 1 else e := 0;
+
+// OpGte
+// Desugar: (a >= a') => (a = a') || !(a <= a') 
+//                    => !(!(a = a') && (a <= a'))
+//
+if (1 >= 0) then f := 1 else f := 0;
+if (1 >= 1) then g := 1 else g := 0;
+
+// OpGt
+// Desugar: (a > a') => !(a <= a')
+// 
+if (1 > 0) then h := 1 else h := 0;
