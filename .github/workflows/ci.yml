@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    name: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 3
+      matrix:
+        os: [ubuntu-20.04, macos-11.0, windows-2019]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-haskell@v1.1
+        with:
+          ghc-version: '8.8.3' # Exact version of ghc to use
+          enable-stack: true
+          cabal-version: '3.2.0.0'
+          stack-version: '2.5.1'
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+      - name: Build whileplus
+        run: stack build
+
+      - name: Package whileplus
+        shell: bash
+        run: |
+          mkdir package
+          dir=$(stack path --dist-dir)/build/whileplus
+          if [[ -e "$dir/whileplus" ]]; then
+            cp "$dir/whileplus" package/whileplus
+          else
+            cp "$dir/whileplus.exe" package/whileplus.exe
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: whileplus-${{ runner.os }}
+          path: package
