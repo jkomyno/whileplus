@@ -22,8 +22,14 @@ desugarStmt (Composition ss)      = DL.Composition $ fmap desugarStmt ss
 desugarStmt (Conditional b t f)   = DL.Conditional (desugarBExpr b) (desugarStmt t) $ desugarStmt f
 desugarStmt (While b s)           = DL.While (desugarBExpr b) (desugarStmt s)
 desugarStmt (Repeat' s b)         = DL.Repeat' (desugarStmt s) (desugarBExpr b)
+desugarStmt (OpAssignment x op a) = desugarOpAssignment x (SU.desugarArithBinOp op) $ desugarAExpr a
 desugarStmt (Repeat s b)          = desugarRepeatUntilLoop (desugarStmt s) $ desugarBExpr b
 desugarStmt (For x a a' s)        = desugarForLoop x (desugarAExpr a) (desugarAExpr a') $ desugarStmt s
+
+
+-- | Desugar assignment + binary arithmetic operation (+=, -=, *=).
+desugarOpAssignment :: DL.Name -> DL.ArithBinOp -> DL.AExpr -> DL.Statement
+desugarOpAssignment x op = DL.Assignment x . DL.ArithBinOp op (DL.AVar x)
 
 
 -- | Desugar repeat-until statement relying on the while statement.

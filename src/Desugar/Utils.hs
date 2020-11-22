@@ -1,8 +1,20 @@
-module Desugar.Utils (negate) where
+module Desugar.Utils (
+    negate
+  , desugarArithBinOp) where
 
 import Prelude hiding (negate)
 
-import Desugar.DesugaredLang
+import Lang
+import qualified Desugar.DesugaredLang as DL
 
-negate :: BExpr -> BExpr
-negate = BoolUnOp OpNeg
+-- | Negate the given desugared boolean expression
+negate :: DL.BExpr -> DL.BExpr
+negate = DL.BoolUnOp DL.OpNeg
+
+
+-- | Convert the given arithmetic binary operator in the equivalent
+-- desugared version
+desugarArithBinOp :: ArithBinOp -> DL.ArithBinOp
+desugarArithBinOp OpSum = DL.OpSum
+desugarArithBinOp OpMul = DL.OpMul
+desugarArithBinOp OpSub = DL.OpSub

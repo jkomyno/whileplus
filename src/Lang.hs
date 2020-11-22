@@ -44,6 +44,7 @@ data Statement
   -- syntactic sugar starts
   | Repeat Statement BExpr                 -- ^ repeat-until based on while
   | For Name AExpr AExpr Statement         -- ^ for loop based on while
+  | OpAssignment Name ArithBinOp AExpr     -- ^ assignment and arithmetic binary operation (+=, -=, *=)
   deriving (Show, Eq)
 
 -- | ADT for boolean expressions

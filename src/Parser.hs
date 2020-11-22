@@ -71,6 +71,9 @@ style = Grammar.emptyDef {
     , "+"
     , "-"
     , "*"
+    , "+="
+    , "-="
+    , "*="
     , ":="
     , "!"
     , "="
@@ -154,7 +157,8 @@ statement = composition
         <|> repeat'
         <|> repeat
         <|> for
-        <|> assignment
+        <|> try assignment
+        <|> opAssignment
 
 -- Parser for arithmetic expressions
 aExpr :: Parser AExpr
@@ -246,6 +250,20 @@ assignment = do
   reservedOp ":="
   body <- aExpr
   return $ Assignment name body
+
+-- Parser for the symbol of sugar assignment + arithmetic binary operator
+arithBinOpAssignment :: Parser ArithBinOp
+arithBinOpAssignment = (reservedOp "+=" >> return OpSum)
+                   <|> (reservedOp "-=" >> return OpSub)
+                   <|> (reservedOp "*=" >> return OpMul)
+
+-- Parser for sugar assignment + arithmetic binary operator
+opAssignment :: Parser Statement
+opAssignment = do
+  name <- identifier
+  op   <- arithBinOpAssignment
+  body <- aExpr
+  return $ OpAssignment name op body
 
 -- Parser for a skip expression
 skip :: Parser Statement
