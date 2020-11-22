@@ -51,21 +51,13 @@ desugarArithRelation OpLte a a' = DL.ArithRelation DL.OpLte a a'
 desugarArithRelation OpNeq a a' = SU.negate $ DL.ArithRelation DL.OpEq a a'
 
 -- | Desugar the '>=' (greater or equal) boolean arithmetic relation
--- (a >= a')
---   => (a = a') || !(a <= a')
---      => !(!(a = a') && (a <= a'))
-desugarArithRelation OpGte a a' = let
-  b  = SU.negate $ DL.ArithRelation DL.OpEq  a a'
-  b' = DL.ArithRelation DL.OpLte a a'
-  in SU.negate $ DL.BoolBinOp DL.OpAnd b b'
+-- (a >= a') => (a' <= a)
+desugarArithRelation OpGte a a' = DL.ArithRelation DL.OpLte a' a
 
 -- | Desugar the '>' (greater) boolean arithmetic relation
 -- (a > a') => !(a <= a')
 desugarArithRelation OpGt  a a' = SU.negate $ DL.ArithRelation DL.OpLte a a'
 
 -- | Desugar the '<' (less than) boolean arithmetic relation
--- (a < a') => (a <= a') && !(a = a')
-desugarArithRelation OpLt  a a' = let
-  b  = DL.ArithRelation DL.OpLte a a'
-  b' = SU.negate $ DL.ArithRelation DL.OpEq a a'
-  in DL.BoolBinOp DL.OpAnd b b'
+-- (a < a') => !(a' <= a)
+desugarArithRelation OpLt  a a' = SU.negate $ DL.ArithRelation DL.OpLte a' a
