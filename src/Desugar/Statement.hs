@@ -16,15 +16,16 @@ import qualified Desugar.DesugaredLang as DL
 
 -- | Desugar statements
 desugarStmt :: Statement -> DL.Statement
-desugarStmt (Assignment name s)   = DL.Assignment name $ desugarAExpr s
-desugarStmt Skip                  = DL.Skip
-desugarStmt (Composition ss)      = DL.Composition $ fmap desugarStmt ss
-desugarStmt (Conditional b t f)   = DL.Conditional (desugarBExpr b) (desugarStmt t) $ desugarStmt f
-desugarStmt (While b s)           = DL.While (desugarBExpr b) (desugarStmt s)
-desugarStmt (Repeat' s b)         = DL.Repeat' (desugarStmt s) (desugarBExpr b)
-desugarStmt (OpAssignment x op a) = desugarOpAssignment x (SU.desugarArithBinOp op) $ desugarAExpr a
-desugarStmt (Repeat s b)          = desugarRepeatUntilLoop (desugarStmt s) $ desugarBExpr b
-desugarStmt (For x a a' s)        = desugarForLoop x (desugarAExpr a) (desugarAExpr a') $ desugarStmt s
+desugarStmt (Assignment name s)        = DL.Assignment name $ desugarAExpr s
+desugarStmt (PairAssignment n (s, s')) = DL.PairAssignment n (desugarAExpr s, desugarAExpr s')
+desugarStmt Skip                       = DL.Skip
+desugarStmt (Composition ss)           = DL.Composition $ fmap desugarStmt ss
+desugarStmt (Conditional b t f)        = DL.Conditional (desugarBExpr b) (desugarStmt t) $ desugarStmt f
+desugarStmt (While b s)                = DL.While (desugarBExpr b) (desugarStmt s)
+desugarStmt (Repeat' s b)              = DL.Repeat' (desugarStmt s) (desugarBExpr b)
+desugarStmt (OpAssignment x op a)      = desugarOpAssignment x (SU.desugarArithBinOp op) $ desugarAExpr a
+desugarStmt (Repeat s b)               = desugarRepeatUntilLoop (desugarStmt s) $ desugarBExpr b
+desugarStmt (For x a a' s)             = desugarForLoop x (desugarAExpr a) (desugarAExpr a') $ desugarStmt s
 
 
 -- | Desugar assignment + binary arithmetic operation (+=, -=, *=).

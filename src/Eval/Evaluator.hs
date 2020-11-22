@@ -30,12 +30,13 @@ eval (DesugaredProgram xs) state = foldl' (flip evalStmt) state xs
 
 -- Evaluate the given statement and return the updated state
 evalStmt :: Statement -> State -> State
-evalStmt (Assignment x a)    = evalAssignment x a
-evalStmt Skip                = id
-evalStmt (Conditional b t f) = evalConditional b t f
-evalStmt (While b stmt)      = evalWhile b stmt
-evalStmt (Repeat' stmt b)    = evalRepeat' stmt b
-evalStmt (Composition ss)    = evalComposition ss
+evalStmt (Assignment x a)     = evalAssignment x a
+evalStmt (PairAssignment n a) = evalPairAssignment n a
+evalStmt Skip                 = id
+evalStmt (Conditional b t f)  = evalConditional b t f
+evalStmt (While b stmt)       = evalWhile b stmt
+evalStmt (Repeat' stmt b)     = evalRepeat' stmt b
+evalStmt (Composition ss)     = evalComposition ss
 
 
 -- | Store a new variable declaration into the environment.
@@ -47,6 +48,14 @@ evalAssignment x a state = let
   state' = insertVar x a' state
   in state' 
 
+
+evalPairAssignment :: (Name, Name) -> (AExpr, AExpr) -> State -> State
+evalPairAssignment (name, name') (a, a') state = let
+  n = evalAExpr a state
+  m = evalAExpr a' state
+  state'  = insertVar name n state
+  state'' = insertVar name' m state'
+  in state''
 
 evalConditional :: BExpr -> Statement -> Statement ->
                    State -> State

@@ -158,6 +158,7 @@ statement = composition
         <|> repeat
         <|> for
         <|> try assignment
+        <|> try pairAssignment
         <|> opAssignment
 
 -- Parser for arithmetic expressions
@@ -250,6 +251,18 @@ assignment = do
   reservedOp ":="
   body <- aExpr
   return $ Assignment name body
+
+-- Parser for pair variable assignment
+pairAssignment :: Parser Statement
+pairAssignment = do
+  name  <- identifier
+  reservedOp ","
+  name' <- identifier
+  reservedOp ":="
+  body  <- aExpr
+  reservedOp ","
+  body' <- aExpr
+  return $ PairAssignment (name, name') (body, body')
 
 -- Parser for the symbol of sugar assignment + arithmetic binary operator
 arithBinOpAssignment :: Parser ArithBinOp

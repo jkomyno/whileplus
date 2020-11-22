@@ -35,16 +35,17 @@ newtype Program = Program [Statement]
 
 -- | ADT for statements
 data Statement
-  = Assignment Name AExpr                  -- ^ numeral variable definition
-  | Skip                                   -- ^ no-op
-  | Composition [Statement]                -- ^ sequential composition of multiple statements
-  | Conditional BExpr Statement Statement  -- ^ if b then S1 else S2
-  | While BExpr Statement                  -- ^ while loop implemented natively
-  | Repeat' Statement BExpr                -- ^ repeat-until loop implemented natively
+  = Assignment Name AExpr                       -- ^ numeral variable definition
+  | PairAssignment (Name, Name) (AExpr, AExpr)  -- ^ x, y := a, a'
+  | Skip                                        -- ^ no-op
+  | Composition [Statement]                     -- ^ sequential composition of multiple statements
+  | Conditional BExpr Statement Statement       -- ^ if b then S1 else S2
+  | While BExpr Statement                       -- ^ while loop implemented natively
+  | Repeat' Statement BExpr                     -- ^ repeat-until loop implemented natively
   -- syntactic sugar starts
-  | Repeat Statement BExpr                 -- ^ repeat-until based on while
-  | For Name AExpr AExpr Statement         -- ^ for loop based on while
-  | OpAssignment Name ArithBinOp AExpr     -- ^ assignment and arithmetic binary operation (+=, -=, *=)
+  | Repeat Statement BExpr                      -- ^ repeat-until based on while
+  | For Name AExpr AExpr Statement              -- ^ for loop based on while
+  | OpAssignment Name ArithBinOp AExpr          -- ^ assignment and arithmetic binary operation (+=, -=, *=)
   deriving (Show, Eq)
 
 -- | ADT for boolean expressions

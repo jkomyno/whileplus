@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wincomplete-patterns #-}
+
 -- |
 --
 -- Check.CheckVariables is responsible of traversing a desugared AST to ensure that the variable
@@ -54,6 +56,17 @@ checkVarsInStatement store (Assignment name a) = do
   let store' = Set.insert name store
   Right store'
 
+-- A pair assignment is valid if the variables referenced in the arithmetical
+-- expressions have already been written to the store. We also need to write
+-- the possibly new variables @name@ and @name'@ to the store.
+checkVarsInStatement store (PairAssignment (name, name') (a, a')) = do
+  checkVarsInAExpr store a
+  checkVarsInAExpr store a'
+  let store'  = Set.insert name  store
+  let store'' = Set.insert name' store'
+  Right store''
+
+-- Composition: we perform the evaluation sequentially for each statement
 checkVarsInStatement store (Composition [])     = return store
 checkVarsInStatement store (Composition (s:ss)) = do
   store' <- checkVarsInStatement store s
