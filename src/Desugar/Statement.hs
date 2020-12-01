@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wincomplete-patterns #-}
+
 -- |
 --
 -- DesugarStatement defines how to desugar While+ statements.
@@ -37,9 +39,9 @@ desugarOpAssignment x op = DL.Assignment x . DL.ArithBinOp op (DL.AVar x)
 -- repeat S until b
 --   => S; while !b do S
 desugarRepeatUntilLoop :: DL.Statement -> DL.BExpr -> DL.Statement
-desugarRepeatUntilLoop s b = let
+desugarRepeatUntilLoop stmt b = let
   notB = SU.negate b
-  in DL.Composition [s, DL.While notB s]
+  in DL.Composition [stmt, DL.While notB stmt]
 
 
 -- | Desugar for-loop statement relying on the while statement.
@@ -48,11 +50,11 @@ desugarRepeatUntilLoop s b = let
 desugarForLoop :: Name ->
                   DL.AExpr -> DL.AExpr -> DL.Statement ->
                   DL.Statement
-desugarForLoop i start end s = let
+desugarForLoop i start end stmt = let
   b       = desugarArithRelation OpLt (DL.AVar i) end
   incStmt = DL.ArithBinOp DL.OpSum (DL.AVar i) (DL.NumLit 1)
   in DL.Composition [
       DL.Assignment i start
     , DL.While b $ DL.Composition [
-        s
+        stmt
       , DL.Assignment i incStmt]]
