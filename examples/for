@@ -1,4 +1,7 @@
 /** 
+ * x := 0;
+ * while (x < -10) do (skip; x = x + 1)
+ *
  * if the second arithmetic clause is negative,
  * the loop is immediately broken
  */
@@ -6,6 +9,11 @@ for x := 0 to -10 do skip;
 
 // x is 0
 
+
+/**
+ * y := 0;
+ * while (y < 5) do (skip; y = y + 1)
+ */
 for y := 0 to 5 do skip;
 
 // y is 5

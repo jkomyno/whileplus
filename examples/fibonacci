@@ -1,7 +1,7 @@
-// 0  1  2  3  4  5  6   7
-// 1, 1, 2, 3, 5, 8, 13, 21 
-
-// n := 5
+// Computes the n-th number of the Fibonacci sequence.
+// n must be written in memory mode (e.g. `:i n := 5`)
+// n: 0  1  2  3  4  5  6   7
+// y: 1, 1, 2, 3, 5, 8, 13, 21 
 
 x := 0;
 y := 1;
