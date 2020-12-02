@@ -1,3 +1,5 @@
+// computes the factorial of x (144) and saves the result in y
+
 x := 144;
 y := 1;
 
